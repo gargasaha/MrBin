@@ -1,0 +1,8 @@
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.csproj.AssemblyReference.cache
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.GeneratedMSBuildEditorConfig.editorconfig
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.AssemblyInfoInputs.cache
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.AssemblyInfo.cs
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.csproj.CoreCompileInputs.cache
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.MvcApplicationPartsAssemblyInfo.cache
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.RazorAssemblyInfo.cache
+/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/MrBin.RazorAssemblyInfo.cs
