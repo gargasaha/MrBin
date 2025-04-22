@@ -1,6 +1,24 @@
 @page
 <div style="display: flex;justify-content: center;text-align: center;">
     <div style="height:100vh;width:100wh;text-align: center;">
-        <div style="height: 80%;width:80vw; background-color: rgb(116, 116, 116); border-radius: 20px;"></div>
+        <div style="height: 80%;width:80vw; background-color: rgb(116, 116, 116); border-radius: 20px;">
+            <div class="btn-group">
+                <button type="button" id="State" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    States
+                </button>
+                <ul class="dropdown-menu">
+                    @foreach(var i in ViewBag.States){
+                        <li value="@i.StateId"><a class="dropdown-item" onclick="setStateName(this.parentElement.getAttribute('value'),this.innerText)">@i.StateName</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    function setStateName(x,y){
+        $("#State").text(y);
+        console.log(y);
+    }
+</script>
