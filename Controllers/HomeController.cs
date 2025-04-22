@@ -7,7 +7,7 @@ namespace MrBin.Controllers;
 
 public class HomeController : Controller
 {
-    private UsrDAL _usrDAL;
+    private readonly UsrDAL _usrDAL;
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger,IConfiguration configuration)
@@ -17,10 +17,18 @@ public class HomeController : Controller
         _usrDAL = new UsrDAL(connectionString);
     }
 
-    public IActionResult Index()
+    public IActionResult UserRegister()
     {
-        var x=_usrDAL.GetAll();
-        Console.WriteLine(x.Result);
+        return View("UserRegister");
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var x = await _usrDAL.GetAll();
+        foreach (var i in x)
+        {
+            Console.WriteLine(i.UserName);
+        }
         return View();
     }
 
