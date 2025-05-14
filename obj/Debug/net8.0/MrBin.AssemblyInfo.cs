@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MrBin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b9533a7fa3a0cbbbf34cd4c7a8071a00663a09b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d4378dc7a89f6e9099a4f99782e6fcb792f81d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("MrBin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MrBin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
