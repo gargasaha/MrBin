@@ -10,6 +10,7 @@ public class HomeController : Controller
     private readonly UsrDAL _usrDAL;
     private readonly StateDAL _stateDAL;
     private readonly DistDAL _distDAL;
+    private readonly ZipCodeDAL _zipDAL;
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger,IConfiguration configuration)
@@ -19,6 +20,7 @@ public class HomeController : Controller
         _usrDAL = new UsrDAL(connectionString);
         _stateDAL = new StateDAL(connectionString);
         _distDAL = new DistDAL(connectionString);
+        _zipDAL = new ZipCodeDAL(connectionString);
     }
 
     public async Task<IActionResult> UserRegister()
@@ -27,12 +29,17 @@ public class HomeController : Controller
         return View("UserRegister");
     }
     
-    [HttpPost]
+    [HttpGet]
     public async Task<List<Dist>> GetDist(string stateId)
     {
         Console.WriteLine("State ID: " + stateId);
         var dist = await _distDAL.GetAllState(stateId);
         return dist;
+    }
+
+    [HttpGet]
+    public async Task<List<ZipCode>> getZipCode(string distId){
+        return await _zipDAL.GetAllZipCode(distId);
     }
 
     public async Task<IActionResult> Index()
