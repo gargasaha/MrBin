@@ -8,7 +8,7 @@
         <div class="text-center mb-4">
             <i class="fa-solid fa-id-card fa-3x text-success mb-2"></i>
             <h2 class="fw-bold mb-1">Create Your Account</h2>
-            <p class="text-muted">Join us and start your journey!</p>
+            @* <p class="text-muted">Join us and start your journey!</p> *@
         </div>
         
         <div class="mb-4">
@@ -60,6 +60,17 @@
                 <ul class="dropdown-menu w-100" id="dist"></ul>
             </div>
         </div>
+
+        <div class="mb-4">
+            <label for="ZipCode" class="form-label fw-semibold">Select ZipCode Code</label>
+            <div class="dropdown w-100">
+                <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-map me-2"></i>Select District
+                </button>
+                <ul class="dropdown-menu w-100" id="dist"></ul>
+            </div>
+        </div>
+
 
         <div class="d-grid mt-4">
             <button class="btn btn-primary btn-lg rounded-pill shadow-sm" type="submit">
