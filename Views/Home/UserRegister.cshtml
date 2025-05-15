@@ -8,7 +8,6 @@
         <div class="text-center mb-4">
             <i class="fa-solid fa-id-card fa-3x text-success mb-2"></i>
             <h2 class="fw-bold mb-1">Create Your Account</h2>
-            @* <p class="text-muted">Join us and start your journey!</p> *@
         </div>
         
         <div class="mb-4">
@@ -34,43 +33,44 @@
         <div class="mb-4">
             <label for="State" class="form-label fw-semibold">Select State</label>
             <div class="dropdown w-100">
-                <button type="button" id="State" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-location-dot me-2"></i>Select State
-                </button>
-                <label style="display:none" name="StateId"></label>
-                <ul class="dropdown-menu w-100">
-                    @foreach (var i in ViewBag.States)
-                    {
-                        <li value="@i.StateId">
-                            <a class="dropdown-item" onclick="setStateName(this.parentElement.getAttribute('value'), this.innerText)">
-                                @i.StateName
-                            </a>
-                        </li>
-                    }
-                </ul>
+            <button type="button" id="State" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-location-dot me-2"></i>Select State
+            </button>
+            <label style="display:none" name="StateId"></label>
+            <ul class="dropdown-menu w-100" style="max-height: 250px; overflow-y: auto;">
+                @foreach (var i in ViewBag.States)
+                {
+                    <li value="@i.StateId">
+                        <a class="dropdown-item" onclick="getDistData(this.parentElement.getAttribute('value'), this.innerText)">
+                            @i.StateName
+                        </a>
+                    </li>
+                }
+            </ul>
             </div>
         </div>
-        
         <div class="mb-4">
             <label for="District" class="form-label fw-semibold">Select District</label>
             <div class="dropdown w-100">
-                <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-map me-2"></i>Select District
-                </button>
-                <ul class="dropdown-menu w-100" id="dist"></ul>
+            <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-map me-2"></i>Select District
+            </button>
+            <ul class="dropdown-menu w-100" id="dist" style="max-height: 250px; overflow-y: auto;"></ul>
             </div>
         </div>
 
         <div class="mb-4">
             <label for="ZipCode" class="form-label fw-semibold">Select ZipCode Code</label>
             <div class="dropdown w-100">
-                <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-map me-2"></i>Select District
-                </button>
-                <ul class="dropdown-menu w-100" id="dist"></ul>
+            <button type="button" id="ZipCode" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-sodistlid fa-map me-2"></i>Select Zip Code 
+            </button>
+            <ul class="dropdown-menu w-100" id="zipCode" style="max-height: 250px; overflow-y: auto;"></ul>
             </div>
         </div>
+        <span class="d-none" id="zId" name="distId"></span>
 
+        </span>
 
         <div class="d-grid mt-4">
             <button class="btn btn-primary btn-lg rounded-pill shadow-sm" type="submit">
@@ -129,18 +129,39 @@
         }
     }
 
-    function setStateName(stateId, stateName) {
+    function getDistData(stateId, stateName) {
         $("#State").html('<i class="fa-solid fa-location-dot me-2"></i>' + stateName);
         
+        $("#dist").empty();
+        $("#dist").append('<li class="text-center py-2" id="dist-loading"><span class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span> Loading districts...</li>');
+
         $.ajax({
             type: "GET",
             url: "/Home/GetDist",
             data: { StateId: stateId },
             success: function (response) {
-                $("#dist").empty();
-                $("#dist").append('<li value="0"><a class="dropdown-item" onclick="setDistName(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>Select District</a></li>');
+            $("#dist").empty();
+            $("#dist").append('<li value="0"><a class="dropdown-item"><i class="fa-solid fa-map me-2"></i>Select District</a></li>');
+            response.forEach(function (item) {
+                $("#dist").append('<li value="' + item.distId + '"><a class="dropdown-item" onclick="getDistCodeData(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>' + item.distName + '</a></li>');
+            });
+            },
+            error: function (xhr, status, error) {
+            console.error("Error:", error);
+            }
+        });
+    }
+
+    function getDistCodeData(distId, distName) {
+        $("#District").html('<i class="fa-solid fa-map me-2"></i>' + distName);
+        $.ajax({
+            type: "GET",
+            url: "/Home/getZipCode",
+            data: { DistId: distId },
+            success: function (response) {
+                $("#zipCode").empty();
                 response.forEach(function (item) {
-                    $("#dist").append('<li value="' + item.distId + '"><a class="dropdown-item" onclick="setDistName(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>' + item.distName + '</a></li>');
+                    $("#zipCode").append('<li value="' + item.zId + '"><a class="dropdown-item" onclick="setDataInSpan(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>' + item.areaName+" "+item.zCode + '</a></li>');
                 });
             },
             error: function (xhr, status, error) {
@@ -148,8 +169,8 @@
             }
         });
     }
-
-    function setDistName(distId, distName) {
-        $("#District").html('<i class="fa-solid fa-map me-2"></i>' + distName);
+    function setDataInSpan(zId, zCode) {
+        $("#ZipCode").html('<i class="fa-solid fa-map me-2"></i>' + zCode);
+        $("#zId").text(zId);
     }
 </script>

@@ -32,14 +32,16 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<List<Dist>> GetDist(string stateId)
     {
-        Console.WriteLine("State ID: " + stateId);
+        // Console.WriteLine("State ID: " + stateId);
         var dist = await _distDAL.GetAllState(stateId);
         return dist;
     }
 
     [HttpGet]
     public async Task<List<ZipCode>> getZipCode(string distId){
-        return await _zipDAL.GetAllZipCode(distId);
+        // Console.WriteLine("District ID: " + distId);
+        var x=await _zipDAL.GetAllZipCode(distId);
+        return x;
     }
 
     public async Task<IActionResult> Index()
