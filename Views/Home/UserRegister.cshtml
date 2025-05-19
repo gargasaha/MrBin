@@ -4,70 +4,100 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
 <div class="d-flex justify-content-center align-items-center vh-100 bg-gradient">
-    <div class="responsive-container bg-white shadow-lg rounded-4 p-5 animate__animated animate__fadeIn" style="max-width: 500px;">
+    <div class="responsive-container bg-white shadow-lg rounded-4 p-5 animate__animated animate__fadeIn"
+        style="max-width: 500px;">
         <div class="text-center mb-4">
             <i class="fa-solid fa-id-card fa-3x text-success mb-2"></i>
             <h2 class="fw-bold mb-1">Create Your Account</h2>
         </div>
-        
+
         <div class="mb-4">
             <label for="UFname" class="form-label fw-semibold">First Name</label>
             <div class="input-group">
                 <span class="input-group-text bg-light"><i class="fa-regular fa-user"></i></span>
-                <input type="text" class="form-control" id="UFname" name="Uname" placeholder="Enter your first name" 
+                <input type="text" class="form-control" id="UFname" name="Uname" placeholder="Enter your first name"
                     onkeydown="if(event.key==='Tab'){validateInput(this, 'h1');}">
             </div>
             <small id="h1" class="text-danger d-none">Please enter your first name</small>
         </div>
-        
+
         <div class="mb-4">
             <label for="ULname" class="form-label fw-semibold">Last Name</label>
             <div class="input-group">
                 <span class="input-group-text bg-light"><i class="fa-regular fa-user"></i></span>
-                <input type="text" class="form-control" id="ULname" name="Uname" placeholder="Enter your last name" 
+                <input type="text" class="form-control" id="ULname" name="Uname" placeholder="Enter your last name"
                     onkeydown="if(event.key==='Tab'){validateInput(this, 'h2');}">
             </div>
             <small id="h2" class="text-danger d-none">Please enter your last name</small>
         </div>
-        
+
         <div class="mb-4">
             <label for="State" class="form-label fw-semibold">Select State</label>
             <div class="dropdown w-100">
-            <button type="button" id="State" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-location-dot me-2"></i>Select State
-            </button>
-            <label style="display:none" name="StateId"></label>
-            <ul class="dropdown-menu w-100" style="max-height: 250px; overflow-y: auto;">
-                @foreach (var i in ViewBag.States)
-                {
-                    <li value="@i.StateId">
-                        <a class="dropdown-item" onclick="getDistData(this.parentElement.getAttribute('value'), this.innerText)">
-                            @i.StateName
-                        </a>
-                    </li>
-                }
-            </ul>
+                <button type="button" id="State" class="btn btn-outline-primary dropdown-toggle w-100"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-location-dot me-2"></i>Select State
+                </button>
+                <label style="display:none" name="StateId"></label>
+                <ul class="dropdown-menu w-100" style="max-height: 250px; overflow-y: auto;">
+                    @foreach (var i in ViewBag.States)
+                    {
+                        <li value="@i.StateId">
+                            <a class="dropdown-item"
+                                onclick="getDistData(this.parentElement.getAttribute('value'), this.innerText)">
+                                @i.StateName
+                            </a>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
         <div class="mb-4">
             <label for="District" class="form-label fw-semibold">Select District</label>
             <div class="dropdown w-100">
-            <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-map me-2"></i>Select District
-            </button>
-            <ul class="dropdown-menu w-100" id="dist" style="max-height: 250px; overflow-y: auto;"></ul>
+                <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-map me-2"></i>Select District
+                </button>
+                <ul class="dropdown-menu w-100" id="dist" style="max-height: 250px; overflow-y: auto;"></ul>
             </div>
         </div>
 
         <div class="mb-4">
             <label for="ZipCode" class="form-label fw-semibold">Select ZipCode Code</label>
             <div class="dropdown w-100">
-            <button type="button" id="ZipCode" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-sodistlid fa-map me-2"></i>Select Zip Code 
-            </button>
-            <ul class="dropdown-menu w-100" id="zipCode" style="max-height: 250px; overflow-y: auto;"></ul>
+                <button type="button" id="ZipCode" class="btn btn-outline-primary dropdown-toggle w-100"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-sodistlid fa-map me-2"></i>Select Zip Code
+                </button>
+                <ul class="dropdown-menu w-100" id="zipCode" style="max-height: 250px; overflow-y: auto;"></ul>
             </div>
         </div>
+
+        <div class="mb-4">
+            <label for="UEmail" class="form-label fw-semibold">Email Address</label>
+            <div class="input-group">
+            <span class="input-group-text bg-light"><i class="fa-regular fa-envelope"></i></span>
+            <input type="email" class="form-control" id="UEmail" name="UEmail" placeholder="Enter your email"
+                autocomplete="email">
+            </div>
+            <div class="d-grid mt-2 position-relative">
+            <button type="button" class="btn btn-outline-success rounded-pill shadow-sm" onclick="validateEmail()" id="verifyEmailBtn">
+                <i class="fa-solid fa-envelope-circle-check me-2"></i>Verify Email
+            </button>
+            
+            <div class="alert alert-success mt-2 d-flex align-items-center justify-content-center gap-2 py-2 px-3 shadow-sm rounded-pill d-none" id="emailVerifiedAlert" style="font-size: 1rem;">
+                <i class="fa-solid fa-circle-check me-2"></i>
+                <span>Email verified</span>
+            </div>
+
+
+            <span id="emailLoading" class="position-absolute top-50 end-0 translate-middle-y me-4 d-none">
+                <span class="spinner-border spinner-border-sm text-success" role="status" aria-hidden="true"></span>
+            </span>
+            </div>
+        </div>
+
         <span class="d-none" id="zId" name="distId"></span>
 
         </span>
@@ -80,17 +110,20 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <style>
-    body, html {
+    body,
+    html {
         height: 100%;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        
     }
+
     .bg-gradient {
         background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
     }
+
     .responsive-container {
         background: #fff;
         border-radius: 1.5rem;
@@ -98,19 +131,24 @@
         transition: box-shadow 0.3s;
         margin-bottom: 50px;
     }
+
     .responsive-container:hover {
         box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.25);
     }
+
     .dropdown-menu a:hover {
         background-color: #e9ecef;
         color: #0d6efd;
     }
+
     .input-group-text {
         border-right: 0;
     }
+
     .form-control {
         border-left: 0;
     }
+
     @@media (max-width: 768px) {
         .responsive-container {
             width: 98%;
@@ -120,6 +158,33 @@
 </style>
 
 <script>
+
+    function validateEmail(){
+        // Show spinner
+        $("#emailLoading").removeClass("d-none");
+        $("#verifyEmailBtn").prop("disabled", true);
+
+        $.ajax({
+            type: "GET",
+            url: "/Home/CheckEmail",
+            data: { email: $("#UEmail").val() },
+            success: function (response) {
+                document.getElementById("UEmail").disabled = true;
+                document.getElementById("verifyEmailBtn").style.display = "none";
+                document.getElementById("emailVerifiedAlert").classList.remove('d-none');
+            },
+            error: function (xhr, status, error) {
+            console.error("Error:", error);
+            },
+            complete: function () {
+            // Hide spinner after response
+            $("#emailLoading").addClass("d-none");
+            
+            }
+        });
+    }
+
+
     function validateInput(input, errorLabelId) {
         if (input.value.trim().length === 0) {
             event.preventDefault();
@@ -131,7 +196,7 @@
 
     function getDistData(stateId, stateName) {
         $("#State").html('<i class="fa-solid fa-location-dot me-2"></i>' + stateName);
-        
+
         $("#dist").empty();
         $("#dist").append('<li class="text-center py-2" id="dist-loading"><span class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span> Loading districts...</li>');
 
@@ -140,14 +205,14 @@
             url: "/Home/GetDist",
             data: { StateId: stateId },
             success: function (response) {
-            $("#dist").empty();
-            $("#dist").append('<li value="0"><a class="dropdown-item"><i class="fa-solid fa-map me-2"></i>Select District</a></li>');
-            response.forEach(function (item) {
-                $("#dist").append('<li value="' + item.distId + '"><a class="dropdown-item" onclick="getDistCodeData(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>' + item.distName + '</a></li>');
-            });
+                $("#dist").empty();
+                $("#dist").append('<li value="0"><a class="dropdown-item"><i class="fa-solid fa-map me-2"></i>Select District</a></li>');
+                response.forEach(function (item) {
+                    $("#dist").append('<li value="' + item.distId + '"><a class="dropdown-item" onclick="getDistCodeData(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>' + item.distName + '</a></li>');
+                });
             },
             error: function (xhr, status, error) {
-            console.error("Error:", error);
+                console.error("Error:", error);
             }
         });
     }
@@ -161,7 +226,7 @@
             success: function (response) {
                 $("#zipCode").empty();
                 response.forEach(function (item) {
-                    $("#zipCode").append('<li value="' + item.zId + '"><a class="dropdown-item" onclick="setDataInSpan(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>' + item.areaName+" "+item.zCode + '</a></li>');
+                    $("#zipCode").append('<li value="' + item.zId + '"><a class="dropdown-item" onclick="setDataInSpan(this.parentElement.getAttribute(\'value\'), this.innerText)"><i class="fa-solid fa-map me-2"></i>' + item.areaName + " " + item.zCode + '</a></li>');
                 });
             },
             error: function (xhr, status, error) {
