@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yC+SxHDwzqO6Z4qCrcbD/6/MfjkLNlNp0X+YDuGSxbY=",
+  "Hash": "ZGKSR6X2Vpo1Nm3Lxr31Q2t5GzWrSjrCjP1f8lBpvfk=",
   "Source": "MrBin",
   "BasePath": "_content/MrBin",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/c-champ/Desktop/DotNetCore/MrBin/obj/Debug/net8.0/scopedcss/projectbundle/MrBin.bundle.scp.css"
+    },
+    {
+      "Identity": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/banner.html",
+      "SourceId": "MrBin",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/",
+      "BasePath": "_content/MrBin",
+      "RelativePath": "banner.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/banner.html"
     },
     {
       "Identity": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/css/site.css",

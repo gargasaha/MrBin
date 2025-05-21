@@ -22,6 +22,11 @@ namespace DAL{
                 };
                 zipCodes.Add(zc);
             }
+            conn.Close();
+            conn.Dispose();
+            sqlDataReader.Close();
+            sqlDataReader.Dispose();
+            cmd.Dispose();
             return zipCodes;
         }
     }

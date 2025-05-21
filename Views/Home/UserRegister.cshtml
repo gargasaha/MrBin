@@ -3,109 +3,124 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-<div class="d-flex justify-content-center align-items-center vh-100 bg-gradient">
-    <div class="responsive-container bg-white shadow-lg rounded-4 p-5 animate__animated animate__fadeIn"
-        style="max-width: 500px;">
-        <div class="text-center mb-4">
-            <i class="fa-solid fa-id-card fa-3x text-success mb-2"></i>
-            <h2 class="fw-bold mb-1">Create Your Account</h2>
-        </div>
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-gradient">
+    <div class="row w-100 justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto"></div>
+            <div class="responsive-container bg-white shadow-lg rounded-4 p-4 p-md-5 animate__animated animate__fadeIn">
+                <div class="text-center mb-4">
+                    <i class="fa-solid fa-id-card fa-3x text-success mb-2"></i>
+                    <h2 class="fw-bold mb-1">Create Your Account</h2>
+                </div>
 
-        <div class="mb-4">
-            <label for="UFname" class="form-label fw-semibold">First Name</label>
-            <div class="input-group">
-                <span class="input-group-text bg-light"><i class="fa-regular fa-user"></i></span>
-                <input type="text" class="form-control" id="UFname" name="Uname" placeholder="Enter your first name"
-                    onkeydown="if(event.key==='Tab'){validateInput(this, 'h1');}">
+                <div class="mb-4">
+                    <label for="UFname" class="form-label fw-semibold">First Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fa-regular fa-user"></i></span>
+                        <input type="text" class="form-control" id="UFname" name="Uname" placeholder="Enter your first name"
+                            onkeydown="if(event.key==='Tab'){validateInput(this, 'h1');}">
+                    </div>
+                    <small id="h1" class="text-danger d-none">Please enter your first name</small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="ULname" class="form-label fw-semibold">Last Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fa-regular fa-user"></i></span>
+                        <input type="text" class="form-control" id="ULname" name="Uname" placeholder="Enter your last name"
+                            onkeydown="if(event.key==='Tab'){validateInput(this, 'h2');}">
+                    </div>
+                    <small id="h2" class="text-danger d-none">Please enter your last name</small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="State" class="form-label fw-semibold">Select State</label>
+                    <div class="dropdown w-100">
+                        <button type="button" id="State" class="btn btn-outline-primary dropdown-toggle w-100"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-location-dot me-2"></i>Select State
+                        </button>
+                        <label style="display:none" name="StateId"></label>
+                        <ul class="dropdown-menu w-100" style="max-height: 250px; overflow-y: auto;">
+                            @foreach (var i in ViewBag.States)
+                            {
+                                <li value="@i.StateId">
+                                    <a class="dropdown-item"
+                                       onclick="getDistData(this.parentElement.getAttribute('value'), this.innerText)">
+                                        @i.StateName
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="District" class="form-label fw-semibold">Select District</label>
+                    <div class="dropdown w-100">
+                        <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-map me-2"></i>Select District
+                        </button>
+                        <ul class="dropdown-menu w-100" id="dist" style="max-height: 250px; overflow-y: auto;"></ul>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="ZipCode" class="form-label fw-semibold">Select ZipCode Code</label>
+                    <div class="dropdown w-100">
+                        <button type="button" id="ZipCode" class="btn btn-outline-primary dropdown-toggle w-100"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-map me-2"></i>Select Zip Code
+                        </button>
+                        <ul class="dropdown-menu w-100" id="zipCode" style="max-height: 250px; overflow-y: auto;"></ul>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="UEmail" class="form-label fw-semibold">Email Address</label>
+                    <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="fa-regular fa-envelope"></i></span>
+                    <input type="email" class="form-control" id="UEmail" name="UEmail" placeholder="Enter your email"
+                        autocomplete="email">
+                    </div>
+                    <div class="d-grid mt-2 position-relative">
+                    <button type="button" class="btn btn-outline-success rounded-pill shadow-sm" onclick="validateEmail()" id="verifyEmailBtn">
+                        <i class="fa-solid fa-envelope-circle-check me-2"></i>Verify Email
+                    </button>
+                    
+                    <div class="alert alert-success mt-2 d-flex align-items-center justify-content-center gap-2 py-2 px-3 shadow-sm rounded-pill d-none" id="emailVerifiedAlert" style="font-size: 1rem;">
+                        <i class="fa-solid fa-circle-check me-2"></i>
+                        <span>Email verified</span>
+                    </div>
+
+                    <span id="emailLoading" class="position-absolute top-50 end-0 translate-middle-y me-4 d-none">
+                        <span class="spinner-border spinner-border-sm text-success" role="status" aria-hidden="true"></span>
+                    </span>
+                    </div>
+                </div>
+
+                <span class="d-none" id="zId" name="distId"></span>
+
+                <div class="mb-4">
+                    <label for="UPassword" class="form-label fw-semibold">Password</label>
+                    <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" class="form-control" id="UPassword" name="UPassword" placeholder="Enter password" autocomplete="new-password" onkeydown="checkUPasswordFormat(this.value,event.key)" >
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="CUPassword" class="form-label fw-semibold">Confirm Password</label>
+                    <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" class="form-control" id="CUPassword" name="CUPassword" placeholder="Confirm password" autocomplete="new-password" onkeyup="checkCUPasswordFormat(this.value,event.key)" onkeydown="if(event.key==='Tab'){event.preventDefault();}">
+                    </div>
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button class="btn btn-primary btn-lg rounded-pill shadow-sm" type="submit">
+                        <i class="fa-solid fa-user-check me-2"></i>Register
+                    </button>
+                </div>
             </div>
-            <small id="h1" class="text-danger d-none">Please enter your first name</small>
-        </div>
-
-        <div class="mb-4">
-            <label for="ULname" class="form-label fw-semibold">Last Name</label>
-            <div class="input-group">
-                <span class="input-group-text bg-light"><i class="fa-regular fa-user"></i></span>
-                <input type="text" class="form-control" id="ULname" name="Uname" placeholder="Enter your last name"
-                    onkeydown="if(event.key==='Tab'){validateInput(this, 'h2');}">
-            </div>
-            <small id="h2" class="text-danger d-none">Please enter your last name</small>
-        </div>
-
-        <div class="mb-4">
-            <label for="State" class="form-label fw-semibold">Select State</label>
-            <div class="dropdown w-100">
-                <button type="button" id="State" class="btn btn-outline-primary dropdown-toggle w-100"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-location-dot me-2"></i>Select State
-                </button>
-                <label style="display:none" name="StateId"></label>
-                <ul class="dropdown-menu w-100" style="max-height: 250px; overflow-y: auto;">
-                    @foreach (var i in ViewBag.States)
-                    {
-                        <li value="@i.StateId">
-                            <a class="dropdown-item"
-                                onclick="getDistData(this.parentElement.getAttribute('value'), this.innerText)">
-                                @i.StateName
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-        <div class="mb-4">
-            <label for="District" class="form-label fw-semibold">Select District</label>
-            <div class="dropdown w-100">
-                <button type="button" id="District" class="btn btn-outline-primary dropdown-toggle w-100"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-map me-2"></i>Select District
-                </button>
-                <ul class="dropdown-menu w-100" id="dist" style="max-height: 250px; overflow-y: auto;"></ul>
-            </div>
-        </div>
-
-        <div class="mb-4">
-            <label for="ZipCode" class="form-label fw-semibold">Select ZipCode Code</label>
-            <div class="dropdown w-100">
-                <button type="button" id="ZipCode" class="btn btn-outline-primary dropdown-toggle w-100"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-sodistlid fa-map me-2"></i>Select Zip Code
-                </button>
-                <ul class="dropdown-menu w-100" id="zipCode" style="max-height: 250px; overflow-y: auto;"></ul>
-            </div>
-        </div>
-
-        <div class="mb-4">
-            <label for="UEmail" class="form-label fw-semibold">Email Address</label>
-            <div class="input-group">
-            <span class="input-group-text bg-light"><i class="fa-regular fa-envelope"></i></span>
-            <input type="email" class="form-control" id="UEmail" name="UEmail" placeholder="Enter your email"
-                autocomplete="email">
-            </div>
-            <div class="d-grid mt-2 position-relative">
-            <button type="button" class="btn btn-outline-success rounded-pill shadow-sm" onclick="validateEmail()" id="verifyEmailBtn">
-                <i class="fa-solid fa-envelope-circle-check me-2"></i>Verify Email
-            </button>
-            
-            <div class="alert alert-success mt-2 d-flex align-items-center justify-content-center gap-2 py-2 px-3 shadow-sm rounded-pill d-none" id="emailVerifiedAlert" style="font-size: 1rem;">
-                <i class="fa-solid fa-circle-check me-2"></i>
-                <span>Email verified</span>
-            </div>
-
-
-            <span id="emailLoading" class="position-absolute top-50 end-0 translate-middle-y me-4 d-none">
-                <span class="spinner-border spinner-border-sm text-success" role="status" aria-hidden="true"></span>
-            </span>
-            </div>
-        </div>
-
-        <span class="d-none" id="zId" name="distId"></span>
-
-        </span>
-
-        <div class="d-grid mt-4">
-            <button class="btn btn-primary btn-lg rounded-pill shadow-sm" type="submit">
-                <i class="fa-solid fa-user-check me-2"></i>Register
-            </button>
         </div>
     </div>
 </div>
@@ -117,11 +132,11 @@
         height: 100%;
         margin: 0;
         padding: 0;
-        
     }
 
     .bg-gradient {
         background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+        min-height: 100vh;
     }
 
     .responsive-container {
@@ -130,6 +145,7 @@
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         transition: box-shadow 0.3s;
         margin-bottom: 50px;
+        width: 100%;
     }
 
     .responsive-container:hover {
@@ -151,16 +167,46 @@
 
     @@media (max-width: 768px) {
         .responsive-container {
-            width: 98%;
+            width: 100%;
             padding: 1.5rem;
+        }
+        .p-md-5 {
+            padding: 1.5rem !important;
         }
     }
 </style>
 
 <script>
 
+    function checkUPasswordFormat(value,key){
+        if(key==='Tab'){
+            if(value.length==0)event.preventDefault();
+        }
+        if(value.length>8){
+            event.preventDefault();
+        }
+        else{
+            //console.log($("#UPassword").val());
+        }
+
+    }
+
+    function checkCUPasswordFormat(value,key){
+        if(key==='Tab'){
+            if(value.length==0)event.preventDefault();
+        }
+
+        if(value!=($("#UPassword").val())){
+            document.getElementById("CUPassword").classList.add('is-invalid');
+        }
+        else{
+            document.getElementById("CUPassword").classList.remove('is-invalid');
+        }
+    }
+
+
     function validateEmail(){
-        // Show spinner
+        
         $("#emailLoading").removeClass("d-none");
         $("#verifyEmailBtn").prop("disabled", true);
 
@@ -177,7 +223,6 @@
             console.error("Error:", error);
             },
             complete: function () {
-            // Hide spinner after response
             $("#emailLoading").addClass("d-none");
             
             }
@@ -196,7 +241,6 @@
 
     function getDistData(stateId, stateName) {
         $("#State").html('<i class="fa-solid fa-location-dot me-2"></i>' + stateName);
-
         $("#dist").empty();
         $("#dist").append('<li class="text-center py-2" id="dist-loading"><span class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span> Loading districts...</li>');
 

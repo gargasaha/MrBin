@@ -14,6 +14,9 @@ namespace MrBin.DAL
             cmd.Parameters.AddWithValue("@Email", email);
             cmd.Parameters.AddWithValue("@Gkey", gkey);
             await cmd.ExecuteNonQueryAsync();
+            conn.Close();
+            conn.Dispose();
+            cmd.Dispose();
         }
 
         public async Task<int> GetSituation(string email, int gkey)
@@ -30,6 +33,8 @@ namespace MrBin.DAL
                 {
                     situation = Convert.ToInt32(reader[0]);
                 }
+                cmd.Dispose();
+
             }
             if (situation == 1)
             {
@@ -37,7 +42,11 @@ namespace MrBin.DAL
                 cmd2.Parameters.AddWithValue("@Email", email);
                 cmd2.Parameters.AddWithValue("@Gkey", gkey);
                 await cmd2.ExecuteNonQueryAsync();
+                cmd2.Dispose();
             }
+            conn.Close();
+            conn.Dispose();
+            
             return situation;
         }
 
@@ -49,6 +58,10 @@ namespace MrBin.DAL
             cmd.Parameters.AddWithValue("@Email", email);
             cmd.Parameters.AddWithValue("@Gkey", gkey);
             await cmd.ExecuteNonQueryAsync();
+            conn.Close();
+            conn.Dispose();
+            cmd.Dispose();
+            
         }
     }
 }

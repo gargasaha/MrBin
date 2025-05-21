@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/MrBin.bundle.scp.css"
     },
     {
+      "Id": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/banner.html",
+      "PackagePath": "staticwebassets/banner.html"
+    },
+    {
       "Id": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
