@@ -4,20 +4,27 @@ namespace MrBin.Models
 {
     public class Usr
     {
-        [Key]
-        public string ?UserId { get; set; }
         [Required]
         [StringLength(100)]
-        public string ?UserName { get; set; }
+        public string? UFname { get; set; }
+
         [Required]
-        [StringLength(2)]
-        public string ?UserStateId { get; set; }
+        [StringLength(100)]
+        public string? ULname { get; set; }
+
         [Required]
-        [StringLength(3)]
-        public string ?UserDistId { get; set; }
-        
-        public byte[] ?UserProfileImage { get; set; }
+        public int? ZipCode { get; set; }
+
         [Required]
-        public byte[] ?Password { get; set; }
+        [StringLength(100)]
+        public string? UEmail { get; set; }
+
+        [Required]
+        public string? UProfileImage { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string? UPassword { get; set; }
+
     }
 }

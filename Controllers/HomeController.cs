@@ -26,10 +26,22 @@ public class HomeController : Controller
         _keyAccessDAL = new keyAccessDAL(connectionString);
     }
 
+    [HttpPost]
+    public void UserRegister(Usr usr)
+    {
+        // foreach (var i in usr.UProfileImage)
+        // { 
+        //     Console.WriteLine(i);
+        // }
+        Console.WriteLine(usr.UFname + " " + usr.ULname + " " + usr.UEmail + " " + usr.ZipCode + " " + (usr.UProfileImage != null ? usr.UProfileImage.Length.ToString() : "null") + " " + usr.UPassword);
+
+    }
+
+
     public async Task<IActionResult> UserRegister()
     {
         ViewBag.States = await _stateDAL.GetAllState();
-        return View("UserRegister");
+        return View(new Usr());
     }
     
     [HttpGet]
@@ -70,7 +82,7 @@ public class HomeController : Controller
                                 <p style='font-size: 16px; color: #333;'>Thank you for registering with us.</p>
                                 <p style='font-size: 16px; color: #333;'>Please verify your email address to complete your registration.</p>
                                 <div style='text-align: center; margin: 30px 0;'>
-                                    <a href='http://localhost:5251/Home/UpdateSituation?key={Gkey}&email={email}' style='background: #4CAF50; color: #fff; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 16px;'>Verify Email</a>
+                                    <a href='http://192.168.1.40:5251/Home/UpdateSituation?key={Gkey}&email={email}' style='background: #4CAF50; color: #fff; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 16px;'>Verify Email</a>
                                 </div>
                                 <p style='font-size: 14px; color: #888; text-align: center;'>If you did not request this, please ignore this email.</p>
                             </div>
@@ -118,11 +130,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var x = await _usrDAL.GetAll();
-        foreach (var i in x)
-        {
-            Console.WriteLine(i.UserName);
-        }
+        
         return View();
     }
 
