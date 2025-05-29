@@ -24,6 +24,12 @@ public class UsrDAL{
             usr.Password = null;
             usrs.Add(usr);
         }
+        connection.Close();
+        connection.Dispose();
+        reader.Close();
+        reader.Dispose();
+        command.Dispose();
+        
         return usrs;
     }
 }

@@ -100,6 +100,22 @@
 
                 <span class="d-none" id="zId" name="distId"></span>
 
+
+
+                <div class="mb-4">
+                    <label for="UImage" class="form-label fw-semibold">Upload Profile Image</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fa-regular fa-image"></i></span>
+                        <input type="file" class="form-control" id="UImage" name="UImage" accept="image/*">
+                    </div>
+                    <button type="button" class="btn btn-outline-primary rounded-pill shadow-sm mt-2 w-100" onclick="imageUpload()">
+                        <i class="fa-regular fa-image me-2"></i>Upload Image
+                    </button>
+                    <image class="d-none" id="imagePreview" src="" alt="Image Preview" style="max-width: 100%; max-height: 200px; margin-top: 10px;">
+                    </image>
+                </div>
+
+
                 <div class="mb-4">
                     <label for="UPassword" class="form-label fw-semibold">Password</label>
                     <div class="input-group">
@@ -177,6 +193,31 @@
 </style>
 
 <script>
+    let base64String="";
+    function imageUpload() {
+        const fileInput = document.getElementById("UImage");
+        if (fileInput.files && fileInput.files[0]) {
+            if (fileInput.files[0].size > 2 * 1024 * 1024) {
+                alert("File size exceeds 2MB. Please upload a smaller image.");
+                return;
+            }
+            const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+            const fileName = fileInput.files[0].name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                alert("Invalid file type. Please upload an image file (jpg, jpeg, png, gif, bmp, webp).");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                base64String = e.target.result.split(',')[1];
+                console.log('Base64 data:', base64String);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+            document.getElementById("imagePreview").src = URL.createObjectURL(fileInput.files[0]);
+            document.getElementById("imagePreview").style.display = "block";
+        }
+    }
 
     function checkUPasswordFormat(value,key){
         if(key==='Tab'){

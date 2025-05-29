@@ -57,6 +57,46 @@ INSERT INTO ZipCode VALUES
 ('732124', 'D-179', 'Katikandar'),
 ('732124', 'D-179', 'Shivajinagar'),
 ('732124', 'D-179', 'Mayna');
+INSERT INTO ZipCode (ZCode, DistCode, AreaName) VALUES
+('736121', 'D-167', 'Alipurduar Court'),
+('736123', 'D-167', 'Kalchini'),
+('736204', 'D-167', 'Falakata'),
+('722101', 'D-168', 'Bankura'),
+('722137', 'D-168', 'Khatra'),
+('722140', 'D-168', 'Indpur'),
+('731101', 'D-169', 'Suri'),
+('731204', 'D-169', 'Bolpur'),
+('731233', 'D-169', 'Rampurhat'),
+('736101', 'D-170', 'Cooch Behar'),
+('736131', 'D-170', 'Dinhata'),
+('736169', 'D-170', 'Mathabhanga'),
+('733101', 'D-171', 'Balurghat'),
+('733121', 'D-171', 'Gangarampur'),
+('733124', 'D-171', 'Tapan'),
+('734101', 'D-172', 'Darjeeling'),
+('734003', 'D-172', 'Siliguri'),
+('734201', 'D-172', 'Kurseong'),
+('712101', 'D-173', 'Chinsurah'),
+('712136', 'D-173', 'Arambagh'),
+('712201', 'D-173', 'Bandel'),
+('711101', 'D-174', 'Howrah'),
+('711204', 'D-174', 'Uluberia'),
+('711302', 'D-174', 'Bagnan'),
+('735101', 'D-175', 'Jalpaiguri'),
+('735221', 'D-175', 'Maynaguri'),
+('735231', 'D-175', 'Dhupguri'),
+('721507', 'D-176', 'Jhargram'),
+('721514', 'D-176', 'Gopiballavpur'),
+('721505', 'D-176', 'Binpur'),
+('734301', 'D-177', 'Kalimpong'),
+('734314', 'D-177', 'Pedong'),
+('734316', 'D-177', 'Gorubathan'),
+('700001', 'D-178', 'BBD Bagh'),
+('700019', 'D-178', 'Ballygunge'),
+('700091', 'D-178', 'Salt Lake'),
+('742101', 'D-180', 'Berhampore'),
+('742123', 'D-180', 'Lalgola'),
+('742189', 'D-180', 'Domkal');
 
 
 
@@ -71,3 +111,10 @@ create table Usr(
     UserPassword binary(64) not null
 )
 alter table Usr add FOREIGN KEY (UserZipCode) REFERENCES ZipCode(ZCode) ON DELETE CASCADE;
+
+
+create table Temp(
+    Email varchar(100),
+    Gkey numeric,
+    Situation numeric
+)
