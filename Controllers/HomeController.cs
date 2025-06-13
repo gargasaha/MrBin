@@ -26,15 +26,30 @@ public class HomeController : Controller
         _keyAccessDAL = new keyAccessDAL(connectionString);
     }
 
-    [HttpPost]
-    public void UserRegister(Usr usr)
+    [HttpGet]
+    public IActionResult registerRCV()
     {
-        // foreach (var i in usr.UProfileImage)
-        // { 
-        //     Console.WriteLine(i);
-        // }
-        Console.WriteLine(usr.UFname + " " + usr.ULname + " " + usr.UEmail + " " + usr.ZipCode + " " + (usr.UProfileImage != null ? usr.UProfileImage.Length.ToString() : "null") + " " + usr.UPassword);
+        return View("registerRCV");
+    }
 
+
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> UserRegister(Usr usr)
+    {
+        Console.WriteLine(usr.UFname + " " + usr.ULname + " " + usr.UEmail + " " + usr.ZipCode + " " + (usr.UProfileImage != null ? usr.UProfileImage.Length.ToString() : "null") + " " + usr.UPassword);
+        try
+        {
+            await _usrDAL.registerUser(usr);
+            return View("Index");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error during user registration: " + ex.Message);
+            throw;
+        }
     }
 
 
@@ -82,7 +97,7 @@ public class HomeController : Controller
                                 <p style='font-size: 16px; color: #333;'>Thank you for registering with us.</p>
                                 <p style='font-size: 16px; color: #333;'>Please verify your email address to complete your registration.</p>
                                 <div style='text-align: center; margin: 30px 0;'>
-                                    <a href='http://192.168.1.40:5251/Home/UpdateSituation?key={Gkey}&email={email}' style='background: #4CAF50; color: #fff; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 16px;'>Verify Email</a>
+                                    <a href='http://192.168.1.9:5251/Home/UpdateSituation?key={Gkey}&email={email}' style='background: #4CAF50; color: #fff; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 16px;'>Verify Email</a>
                                 </div>
                                 <p style='font-size: 14px; color: #888; text-align: center;'>If you did not request this, please ignore this email.</p>
                             </div>
@@ -128,9 +143,8 @@ public class HomeController : Controller
         await Response.WriteAsync(System.IO.File.ReadAllText("wwwroot/banner.html"));
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        
         return View();
     }
 

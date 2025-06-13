@@ -4,32 +4,47 @@ using Microsoft.Data.SqlClient;
 namespace MrBin.DAL;
 public class UsrDAL{
     private readonly string _connectionString;
+    private readonly SqlConnection sqlConnection;
+    private SqlCommand sqlCommand;
+    private SqlDataReader sqlDataReader;
     public UsrDAL(string connectionString)
     {
         _connectionString = connectionString;
+        sqlConnection = new SqlConnection(_connectionString);
+        sqlConnection.Open();
     }
-    // public async Task<List<Usr>> GetAll(){
-    //     SqlConnection connection = new SqlConnection(_connectionString);
-    //     List<Usr> usrs = new List<Usr>();
-    //     SqlCommand command = new SqlCommand("SELECT * FROM Usr", connection);
-    //     await connection.OpenAsync();
-    //     SqlDataReader reader = await command.ExecuteReaderAsync();
-    //     while(await reader.ReadAsync()){
-    //         Usr usr = new Usr();
-    //         usr.UserId =reader[0].ToString();
-    //         usr.UserName = reader[1].ToString();
-    //         usr.UserStateId = null;
-    //         usr.UserDistId = null;
-    //         usr.UserProfileImage = null;
-    //         usr.Password = null;
-    //         usrs.Add(usr);
-    //     }
-    //     connection.Close();
-    //     connection.Dispose();
-    //     reader.Close();
-    //     reader.Dispose();
-    //     command.Dispose();
-        
-    //     return usrs;
-    // }
+    public async Task registerUser(Usr usr)
+    {
+        sqlCommand = new SqlCommand("insert into Usr (UFname, ULname, ZipCode, UEmail, UProfileImage, UPassword) values (@UFname, @ULname, @ZipCode, @UEmail, @UProfileImage, @UPassword)", sqlConnection);
+        sqlCommand.Parameters.AddWithValue("@UFname", usr.UFname);
+        sqlCommand.Parameters.AddWithValue("@ULname", usr.ULname);
+        sqlCommand.Parameters.AddWithValue("@ZipCode", usr.ZipCode);
+        sqlCommand.Parameters.AddWithValue("@UEmail", usr.UEmail);
+
+        // Ensure UProfileImage is a byte array for varbinary(max) columns
+        if (usr.UProfileImage != null)
+        {
+            sqlCommand.Parameters.Add("@UProfileImage", System.Data.SqlDbType.VarBinary).Value = usr.UProfileImage;
+        }
+        else
+        {
+            sqlCommand.Parameters.Add("@UProfileImage", System.Data.SqlDbType.VarBinary).Value = DBNull.Value;
+        }
+
+        sqlCommand.Parameters.AddWithValue("@UPassword", usr.UPassword);
+        try
+        {
+            await sqlCommand.ExecuteNonQueryAsync();
+        }
+        catch (SqlException ex)
+        {
+            Console.WriteLine($"SQL Error: {ex.Message}");
+            throw;
+        }
+        finally
+        {
+            sqlCommand.Dispose();
+            
+        }
+    }
 }

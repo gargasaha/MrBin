@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/images/trashIcon.png",
+      "PackagePath": "staticwebassets/images/trashIcon.png"
+    },
+    {
       "Id": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

@@ -1,5 +1,3 @@
-
-
 create table State(
     StateId varchar(2) primary key,
     StateName varchar(100)
@@ -117,4 +115,19 @@ create table Temp(
     Email varchar(100),
     Gkey numeric,
     Situation numeric
+)
+
+create table RCV(
+    vehicleId int PRIMARY KEY,
+    vehicleType varchar(100) not null,
+    vehicleModelNumber varchar(100) not null,
+    vehicleChassisNumber varchar(100) not null,
+    vehicleEngineNumber varchar(100) not null,
+    vehicleRegistrationNumber varchar(100) not null,
+    vehicleFuelType varchar(10) not null,
+    vehicleCapacity varchar(100) not null,
+    vehicleYearOfManufacture DATE not null,
+    vehicleRC varbinary(max) not null,
+    vehicleInsurance varbinary(max) not null,
+    vehicleFitnessCertificate varbinary(max) not null,
 )

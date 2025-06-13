@@ -20,7 +20,7 @@ namespace MrBin.Models
         public string? UEmail { get; set; }
 
         [Required]
-        public string? UProfileImage { get; set; }
+        public byte[]? UProfileImage { get; set; }
 
         [Required]
         [StringLength(100)]

@@ -45,7 +45,6 @@
 
 
 
-
                 @* select state dist and zipcode *@
                 <div class="mb-4">
                     <label for="State" class="form-label fw-semibold">Select State</label>
@@ -86,7 +85,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-map me-2"></i>Select Zip Code
                         </button>
-                        <input type="hidden" asp-for="ZipCode" id="ZipCodeHidden" />
+                        <input type="hidden" asp-for="ZipCode" id="ZipCodeHidden" value="-1" />
                         <ul class="dropdown-menu w-100" id="zipCode" style="max-height: 250px; overflow-y: auto;"></ul>
                     </div>
                 </div>
@@ -173,7 +172,7 @@
                 </div>
 
                 <div class="d-grid mt-4">
-                    <button class="btn btn-primary btn-lg rounded-pill shadow-sm" type="submit">
+                    <button class="btn btn-primary btn-lg rounded-pill shadow-sm" type="submit" onclick="finalValidation()">
                         <i class="fa-solid fa-user-check me-2"></i>Register
                     </button>
                 </div>
@@ -236,6 +235,18 @@
 </style>
 
 <script>
+
+    function finalValidation(){
+        if(document.getElementById('ZipCodeHidden').value=='-1'){
+            preventDefault();
+            alert('select Zip Code');
+        }
+
+
+    }
+
+
+
     let base64String = "";
     function imageUpload() {
         const fileInput = document.getElementById("UImage");

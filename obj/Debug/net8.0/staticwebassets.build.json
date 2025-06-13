@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZGKSR6X2Vpo1Nm3Lxr31Q2t5GzWrSjrCjP1f8lBpvfk=",
+  "Hash": "DCz1X8MS2diDQKRrCLtt0lgA4KgKDzkzWYuymmAzrPc=",
   "Source": "MrBin",
   "BasePath": "_content/MrBin",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/images/trashIcon.png",
+      "SourceId": "MrBin",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/",
+      "BasePath": "_content/MrBin",
+      "RelativePath": "images/trashIcon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/trashIcon.png"
     },
     {
       "Identity": "/home/c-champ/Desktop/DotNetCore/MrBin/wwwroot/js/site.js",
