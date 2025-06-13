@@ -32,10 +32,6 @@ public class HomeController : Controller
         return View("registerRCV");
     }
 
-
-
-
-
     [HttpPost]
     public async Task<IActionResult> UserRegister(Usr usr)
     {
