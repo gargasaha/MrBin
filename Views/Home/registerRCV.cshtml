@@ -1,3 +1,93 @@
-<form asp-action="registerRCV" method="post">
-    
+@model MrBin.Models.RCV
+
+<h2 class="mb-4 text-center fw-bold text-primary my-4">Register RCV</h2>
+<form asp-action="registerRCV" method="post" enctype="multipart/form-data" class="border p-5 rounded-4 shadow bg-white mx-auto" style="max-width: 600px;">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="vehicleType" class="form-label fw-semibold">Vehicle Type</label>
+            <select asp-for="vehicleType" class="form-select" id="vehicleType" onclick="console.log(this.value)">
+                <option value="">-- Select Vehicle Type --</option>
+                <option value="Truck">Truck</option>
+                <option value="Van">Van</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleModelNumber" class="form-label fw-semibold">Model Number</label>
+            <input asp-for="vehicleModelNumber" class="form-control" placeholder="Enter Model Number" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleChassisNumber" class="form-label fw-semibold">Chassis Number</label>
+            <input asp-for="vehicleChassisNumber" class="form-control" placeholder="Enter Chassis Number" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleEngineNumber" class="form-label fw-semibold">Engine Number</label>
+            <input asp-for="vehicleEngineNumber" class="form-control" placeholder="Enter Engine Number" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehcleRegistrationNumber" class="form-label fw-semibold">Registration Number</label>
+            <input asp-for="vehcleRegistrationNumber" class="form-control" placeholder="Enter Registration Number" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleFuelType" class="form-label fw-semibold">Fuel Type</label>
+            <input asp-for="vehicleFuelType" class="form-control" placeholder="e.g., Diesel, Petrol" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleCapacity" class="form-label fw-semibold">Capacity</label>
+            <input asp-for="vehicleCapacity" class="form-control" placeholder="Enter Capacity" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleYearOfManufacture" class="form-label fw-semibold">Year of Manufacture</label>
+            <input asp-for="vehicleYearOfManufacture" type="date" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="vehicleRCV" class="form-label fw-semibold">Upload RCV Document</label>
+            <input asp-for="vehicleRCV" type="file" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="vehicleInsurance" class="form-label fw-semibold">Upload Insurance</label>
+            <input asp-for="vehicleInsurance" type="file" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="vehicleFitnessCertificate" class="form-label fw-semibold">Upload Fitness Certificate</label>
+            <input asp-for="vehicleFitnessCertificate" type="file" class="form-control" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100 mt-4 py-2 fs-5" onclick="return checkFieldValidation()">Register Vehicle</button>
 </form>
+<script>
+    function checkFieldValidation(){
+        var vehicleId = document.getElementById("vehicleId").value;
+        var vehicleType = document.getElementById("vehicleType").value;
+        var vehicleModelNumber = document.getElementById("vehicleModelNumber").value;
+        var vehicleChassisNumber = document.getElementById("vehicleChassisNumber").value;
+        var vehicleEngineNumber = document.getElementById("vehicleEngineNumber").value;
+        var vehcleRegistrationNumber = document.getElementById("vehcleRegistrationNumber").value;
+        var vehicleFuelType = document.getElementById("vehicleFuelType").value;
+        var vehicleCapacity = document.getElementById("vehicleCapacity").value;
+        var vehicleYearOfManufacture = document.getElementById("vehicleYearOfManufacture").value;
+
+        if (!vehicleId || !vehicleType || !vehicleModelNumber || !vehicleChassisNumber || !vehicleEngineNumber || !vehcleRegistrationNumber || !vehicleFuelType || !vehicleCapacity || !vehicleYearOfManufacture) {
+            document.getElementById("vehicleId").style.borderBlock= "2px solid red";
+            document.getElementById("vehicleType").style.borderBlock= "2px solid red";
+            document.getElementById("vehicleModelNumber").style.borderBlock= "2px solid red";
+            document.getElementById("vehicleChassisNumber").style.borderBlock= "2px solid red";
+            document.getElementById("vehicleEngineNumber").style.borderBlock= "2px solid red";
+            document.getElementById("vehcleRegistrationNumber").style.borderBlock= "2px solid red";
+            document.getElementById("vehicleFuelType").style.borderBlock= "2px solid red";
+            document.getElementById("vehicleCapacity").style.borderBlock= "2px solid red";
+            document.getElementById("vehicleYearOfManufacture").style.borderBlock= "2px solid red"; 
+            return false;
+        }
+        else{
+            document.getElementById("vehicleId").style.border = "";
+            document.getElementById("vehicleType").style.border = "";
+            document.getElementById("vehicleModelNumber").style.border = "";
+            document.getElementById("vehicleChassisNumber").style.border = "";
+            document.getElementById("vehicleEngineNumber").style.border = "";
+            document.getElementById("vehcleRegistrationNumber").style.border = "";
+            document.getElementById("vehicleFuelType").style.border = "";
+            document.getElementById("vehicleCapacity").style.border = "";
+            document.getElementById("vehicleYearOfManufacture").style.border = "";
+        }
+    }
+</script>
