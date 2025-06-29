@@ -1,0 +1,222 @@
+@model MrBin.Models.RCV
+
+<h2 class="mb-4 text-center fw-bold text-primary my-4">Register RCV</h2>
+<form asp-action="registerRCV" asp-controller="Admin" method="post" enctype="multipart/form-data"
+    class="border p-5 rounded-4 shadow bg-white mx-auto" style="max-width: 600px;">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label fw-semibold">Vehicle Type</label>
+            <select id="vehicleType" class="form-select" asp-for="vehicleType">
+                <option value="">-- Select Vehicle Type --</option>
+                <option value="Truck">Truck</option>
+                <option value="Van">Van</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleModelNumber" class="form-label fw-semibold">Model Number</label>
+            <input asp-for="vehicleModelNumber" class="form-control" placeholder="Enter Model Number" id="vehicleModelNumber" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleChassisNumber" class="form-label fw-semibold">Chassis Number</label>
+            <input asp-for="vehicleChassisNumber" class="form-control" placeholder="Enter Chassis Number" id="vehicleChassisNumber" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleEngineNumber" class="form-label fw-semibold">Engine Number</label>
+            <input asp-for="vehicleEngineNumber" class="form-control" placeholder="Enter Engine Number" id="vehicleEngineNumber" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehcleRegistrationNumber" class="form-label fw-semibold">Registration Number</label>
+            <input asp-for="vehcleRegistrationNumber" class="form-control" placeholder="Enter Registration Number" id="vehcleRegistrationNumber" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleFuelType" class="form-label fw-semibold">Fuel Type</label>
+            <input asp-for="vehicleFuelType" class="form-control" placeholder="e.g., Diesel, Petrol" id="vehicleFuelType" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleCapacity" class="form-label fw-semibold">Capacity</label>
+            <input asp-for="vehicleCapacity" class="form-control" placeholder="Enter Capacity" id="vehicleCapacity" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="vehicleYearOfManufacture" class="form-label fw-semibold">Year of Manufacture</label>
+            <input asp-for="vehicleYearOfManufacture" type="date" class="form-control" id="vehicleYearOfManufacture" />
+        </div>
+
+
+
+        <div class="col-md-4">
+            <label asp-for="vehicleRC" class="form-label fw-semibold">Upload RCV Document</label>
+            <input asp-for="vehicleRC" type="file" class="form-control" id="vehicleRC" />
+            <button type="button" onclick="uploadFileAndConvertBase64(document.getElementById('vehicleRC').value,1)"
+                class="btn btn-success my-3">Upload file</button>
+            <img id="vehicleRCImage" src="" alt="RCV Document" style="display:none; max-width: 100%; height: auto;" />
+            <span id="vehicleRCValue" style="display:none"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="vehicleInsurance" class="form-label fw-semibold">Upload Insurance</label>
+            <input asp-for="vehicleInsurance" type="file" class="form-control" id="vehicleInsurance" />
+            <button type="button"
+                onclick="uploadFileAndConvertBase64(document.getElementById('vehicleInsurance').value,2)"
+                class="btn btn-success my-3">Upload file</button>
+            <img id="vehicleInsuranceImage" src="" alt="Insurance Document"
+                style="display:none; max-width: 100%; height: auto;" />
+            <span id="vehicleInsuranceValue" style="display:none"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="vehicleFitnessCertificate" class="form-label fw-semibold">Upload Fitness Certificate</label>
+            <input asp-for="vehicleFitnessCertificate" type="file" class="form-control"
+                id="vehicleFitnessCertificate" />
+            <button type="button"
+                onclick="uploadFileAndConvertBase64(document.getElementById('vehicleFitnessCertificate').value,3)"
+                class="btn btn-success my-3">Upload file</button>
+            <img id="vehicleFitnessCertificateImage" src="" alt="Fitness Certificate"
+                style="display:none; max-width: 100%; height: auto;" />
+            <span id="vehicleFitnessCertificateValue" style="display:none"></span>
+        </div>
+    </div>
+    
+</form>
+<button class="btn btn-primary w-100 mt-4 py-2 fs-5" onclick="return checkFieldValidation()">Register Vehicle</button>
+<script>
+    var f1=false;
+    var f2=false;
+    var f3=false;
+    function uploadFileAndConvertBase64(file, type) {
+        var fileInput;
+        if (type === 1) {
+            fileInput = document.getElementById("vehicleRC");
+        } else if (type === 2) {
+            fileInput = document.getElementById("vehicleInsurance");
+        } else if (type === 3) {
+            fileInput = document.getElementById("vehicleFitnessCertificate");
+        }
+        if (fileInput && fileInput.files && fileInput.files[0]) {
+            var fileReader = new FileReader();
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            if (!allowedExtensions.exec(fileInput.value)) {
+                alert("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
+                fileInput.value = "";
+                return;
+            }
+            if (fileInput.files[0].size > 5 * 1024 * 1024) {
+                alert("File size exceeds 5MB. Please upload a smaller file.");
+                fileInput.value = "";
+                return;
+            }
+            fileReader.onload = function (event) {
+                var base64String = event.target.result.split(',')[1];
+                if (type === 1) {
+                    document.getElementById("vehicleRCValue").innerHTML = base64String;
+                    var image = document.getElementById("vehicleRCImage");
+                    image.src = event.target.result;
+                    image.style.display = "block";
+                    f1=true;
+                    return;
+                } else if (type === 2) {
+                    document.getElementById("vehicleInsuranceValue").innerHTML = base64String;
+                    var image = document.getElementById("vehicleInsuranceImage");
+                    image.src = event.target.result;
+                    image.style.display = "block";
+                    f2=true;
+                    return;
+                } else if (type === 3) {
+                    document.getElementById("vehicleFitnessCertificateValue").innerHTML = base64String;
+                    var image = document.getElementById("vehicleFitnessCertificateImage");
+                    image.src = event.target.result;
+                    image.style.display = "block";
+                    f3=true;
+                    return;
+                }
+            };
+            fileReader.readAsDataURL(fileInput.files[0]);
+        } else {
+            alert("Please select a file to upload.");
+        }
+    }
+    function insertVehicleType() {
+        var vehicleType = document.getElementById("vehicleType").value;
+        document.getElementById("vehicleType").innerHTML = vehicleType;
+    }
+    function checkFieldValidation() {
+        var f = true;
+        var vehicleType = document.getElementById("vehicleType").value.trim();
+        var vehicleModelNumber = document.getElementById("vehicleModelNumber").value.trim();
+        var vehicleChassisNumber = document.getElementById("vehicleChassisNumber").value.trim();
+        var vehicleEngineNumber = document.getElementById("vehicleEngineNumber").value.trim();
+        var vehicleRegistrationNumber = document.getElementById("vehcleRegistrationNumber").value.trim();
+        var vehicleFuelType = document.getElementById("vehicleFuelType").value.trim();
+        var vehicleCapacity = document.getElementById("vehicleCapacity").value.trim();
+        var vehicleYearOfManufacture = document.getElementById("vehicleYearOfManufacture").value.trim();
+        if (!vehicleType) {
+            document.getElementById("vehicleType").style.border = "2px solid red";
+            f = false;
+        }
+        else {
+            document.getElementById("vehicleType").style.border = "";
+        }
+        if (!vehicleModelNumber) {
+            document.getElementById("vehicleModelNumber").style.border = "2px solid red";
+            f = false;
+        }
+        else{
+            document.getElementById("vehicleModelNumber").style.border = "";
+        }
+        if (!vehicleChassisNumber) {
+            document.getElementById("vehicleChassisNumber").style.border = "2px solid red";
+            f = false;
+        }
+        else {
+            document.getElementById("vehicleChassisNumber").style.border = "";
+        }
+        if (!vehicleEngineNumber) {
+            document.getElementById("vehicleEngineNumber").style.border = "2px solid red";
+            f = false;
+        }
+        else {
+            document.getElementById("vehicleEngineNumber").style.border = "";
+        }
+        if (!vehicleRegistrationNumber) {
+            document.getElementById("vehcleRegistrationNumber").style.border = "2px solid red";
+            f = false;
+        }
+        else {
+            document.getElementById("vehcleRegistrationNumber").style.border = "";
+        }
+        if (!vehicleFuelType) {
+            document.getElementById("vehicleFuelType").style.border = "2px solid red";
+            f = false;
+        }
+        else {
+            document.getElementById("vehicleFuelType").style.border = "";
+        }
+        if (!vehicleCapacity) {
+            document.getElementById("vehicleCapacity").style.border = "2px solid red";
+            f = false;
+        }
+        else {
+            document.getElementById("vehicleCapacity").style.border = "";
+        }
+        if (!vehicleYearOfManufacture) {
+            document.getElementById("vehicleYearOfManufacture").style.border = "2px solid red";
+            f = false;
+        }
+        else {
+            document.getElementById("vehicleYearOfManufacture").style.border = "";
+        }
+        if(f1==false || f2==false || f3==false) {
+            if(f1==false){
+                alert("Please upload RCV Document");
+                f=false;
+            }
+            if(f2==false){
+                alert("Please upload Vehicle Insurance Document");
+                f=false;
+            }
+            if(f3==false){
+                alert("Please upload Vehicle Fitness Certificate");
+                f=false;
+            }
+        }
+        console.log(f);
+        return f;
+    }
+</script>

@@ -20,9 +20,9 @@ public class AdminController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult Index(string userId,string password)
+    public IActionResult Index(string userId, string password)
     {
-        
+
         if (userId.Equals("admin") && password.Equals("admin"))
         {
             return Redirect("/Home/registerRCV");
@@ -31,6 +31,18 @@ public class AdminController : Controller
         {
             return View();
         }
-        
+    }
+    [HttpGet]
+    public IActionResult RegisterRCV()
+    {
+        return View("registerRCV");
+    }
+    [HttpPost]
+    public IActionResult RegisterRCV(MrBin.Models.RCV model)
+    {
+        if (ModelState.IsValid){
+            return RedirectToAction("Index");
+        }
+        return View(model);
     }
 }

@@ -22,16 +22,16 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/c-champ/Desktop/DotNetCore/MrBin/Views/Admin/registerRCV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vcmVnaXN0ZXJSQ1YuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/c-champ/Desktop/DotNetCore/MrBin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/c-champ/Desktop/DotNetCore/MrBin/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/c-champ/Desktop/DotNetCore/MrBin/Views/Home/registerRCV.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9yZWdpc3RlclJDVi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/c-champ/Desktop/DotNetCore/MrBin/Views/Home/UserRegister.cshtml]

@@ -58,14 +58,12 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<List<Dist>> GetDist(string stateId)
     {
-        // Console.WriteLine("State ID: " + stateId);
         var dist = await _distDAL.GetAllState(stateId);
         return dist;
     }
 
     [HttpGet]
     public async Task<List<ZipCode>> getZipCode(string distId){
-        // Console.WriteLine("District ID: " + distId);
         var x=await _zipDAL.GetAllZipCode(distId);
         return x;
     }
@@ -74,6 +72,12 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<IActionResult> CheckEmail(string email)
     {
+        bool chk = await _usrDAL.checkSameEmail(email);
+        // Console.WriteLine("Email Check: " + email + " - " + chk);
+        if (chk==false)
+        {
+            return Json(new { success = false, message = "Email already exists" });
+        }
         Random random = new Random();
         int Gkey= random.Next(100000, 999999);
         try
@@ -121,7 +125,6 @@ public class HomeController : Controller
                 return Json(new { success = true });
             }
             else if(x==0){
-                // Console.WriteLine("Email not verified yet");
                 Task.Delay(1000).Wait();
                 continue;
             }
@@ -131,7 +134,6 @@ public class HomeController : Controller
     [HttpGet]
     public async Task UpdateSituation()
     {
-        // Console.WriteLine("UpdateSituation called");
         var Gkey = Request.Query["key"];
         var email = Request.Query["email"];
         await _keyAccessDAL.UpdateKey(email, Convert.ToInt32(Gkey));

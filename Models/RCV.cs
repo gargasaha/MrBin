@@ -10,7 +10,7 @@ namespace MrBin.Models
         public string? vehicleFuelType { get; set; }
         public string? vehicleCapacity { get; set; }
         public DateOnly? vehicleYearOfManufacture { get; set; }
-        public byte[]? vehicleRCV { get; set; }
+        public byte[]? vehicleRC { get; set; }
         public byte[]? vehicleInsurance { get; set; }
         public byte[]? vehicleFitnessCertificate { get; set; }
     }
